@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Learn</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="container" id="app">
+    <div class="card">
+        <h1>{{title}}</h1>
+        <div class="form-control">
+            <label for="add"></label>
+            <input
+                    id="add"
+                    type="text"
+                    :placeholder="addPlaceholder"
+                    v-model="inputValue"
+                    @keydown.enter="addTodoHandler"
+            />
+        </div>
+        <button
+                :class="[
+        'btn',
+        {'primary': inputValue.length !== 0 }
+        ]"
+                @click="addTodoHandler">Добавить</button>
+        <hr/>
+        <ul class="list" v-if="todos.length !== 0">
+            <li
+                    class="list-item"
+                    v-for="(todo, index) in todos"
+            >
+                {{index + 1 }}. {{toUpperCaseTodo(todo)}}
+                <button
+                        class="btn danger"
+                        @click="deleteTodoHandler(index)"
+                >
+                    Удалить
+                </button>
+            </li>
+            <li>
+                <hr />
+            </li>
+
+            <li>
+                <span :style="{
+                fontWeight: todos.length > 3 ? 'bold' : 'normal',
+                color: todos.length >= 5 ? 'red' : 'green'
+                }">Всего задач: {{todos.length}}</span> | удвоенное значение: {{doubleCountComputed}}
+            </li>
+        </ul>
+        <div v-else>Everything is done. You can add a new task.</div>
+    </div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
