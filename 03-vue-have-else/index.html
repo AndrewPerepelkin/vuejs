@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What Vue have else</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="container pt-5" id="app" v-cloak>
+    <div class="card center">
+        <div v-html="html"></div>
+        <!--        <h2 v-text="title"></h2>-->
+        <!--        <h2 v-once>{{title}}</h2>-->
+        <!--        <h2 v-pre>{{title}}</h2>-->
+        <!--        <button class="btn" @click="title = 'New title'">Change title</button>-->
+        <!--        <ul class="list">-->
+        <!--            <li class="list-item" v-for="(value, key) in car">{{key}}: {{value}}</li>-->
+        <!--        </ul>-->
+        <div class="form-control">
+            <label for="addItem">Add a new Item to the List:</label>
+            <input
+                    id="addItem"
+                    type="text"
+                    ref="addItemInput"
+                    @keyup.enter.shift.exact="addItem"
+            />
+        </div>
+        <ul class="list" v-if="items.length !== 0">
+            <!--            <li class="list-item" v-for="(item, index) in 7">{{index + 1}}. {{item}}</li>-->
+            <li
+                    class="list-item"
+                    v-for="(item, index) in items"
+                    @click.middle.prevent.stop="deleteItem(index), log(item)"
+                    style="cursor: pointer"
+                    :key="item"
+            >{{item + '.'}}&nbsp;
+                <input type="text" @click.middle.stop/>
+            </li>
+        </ul>
+        <h3 v-show="items.length === 0">Not available elements</h3>
+    </div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
